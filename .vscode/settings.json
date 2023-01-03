@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.ejs": "ejs" // this create the language « ejs » which refers to any .ejs file
+    },
+    "[ejs]": { // custom settings for the language « ejs »
+        "editor.formatOnSave": false
+    }
+}

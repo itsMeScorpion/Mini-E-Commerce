@@ -1,0 +1,43 @@
+<%- include('../partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/forms.css" />
+    <link rel="stylesheet" href="/css/product.css" />
+  </head>
+
+  <body>
+    <%- include('../partials/nav.ejs') %>
+
+<div class="container m-5">
+  <div class="row">
+    <div class="col-6">
+      <img src="<%= productData.image %>" width="500px" height="400px"/>
+    </div>
+    <div class="col-6">
+      <h2><%= productData.title %></h2>
+      <h4>$ <%= productData.price %></h4>
+      <p><%= productData.description %></p>
+
+     
+  <div class="card__actions">
+     <form method="POST" action="<%= isInWishlist ? '/remove-from-wishlist' : '/add-to-wishlist' %>">
+              <input type="hidden" name="productID" value="<%= productData.id %>">
+              <button class="btn"> <%= isInWishlist ? 'Remove From Wishlist' : 'Add to Wishlist ' %></button>
+</form>
+<form method="POST" action="<%= iscart ? '/remove-from-cart' : '/add-to-cart' %>">
+              <input type="hidden" name="productID" value="<%= productData.id %>">
+              <button class="btn"> <%= iscart ? 'Remove From Cart' : 'Add to Cart ' %></button>
+             </form>
+ <div>
+ <div class="back-to-shop mt-5">
+            <a href="/">&leftarrow;
+              <span>Back to shop</span>
+            </a>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<%- include('../partials/end.ejs') %>

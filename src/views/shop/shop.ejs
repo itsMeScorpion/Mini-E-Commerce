@@ -1,0 +1,48 @@
+<%- include('../partials/head.ejs') %>
+
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/product.css" />
+  </head>
+
+  <body>
+    <%- include('../partials/nav.ejs') %>
+
+    <main>
+    <% if(products.length === 0){ %>
+
+    <h1>No Products Found </h1>
+     <% } else{ %>
+  
+      <p>List of all the products...</p>
+      <div class="main-div container">
+      <% products.forEach(function(product){  %>
+      <div class="grids">
+        <article class="card product-item">
+          <header class="card__header">
+            <h1 class="product__title"><%= product.title %></h1>
+          </header>
+          <div class="card__image">
+            <img
+              src="<%= product.image %>"
+              width=300px
+              height=300px
+            />
+          </div>
+          <div class="card__content">
+            <h2 class="product__price">$<%= product.price %></h2>
+            <p class="product__description">
+              <%= product.description %>
+            </p>
+          </div>
+          <div class="card__actions">
+            <form method="GET" action="/products/<%= product.id %>">
+              <button class="btn"> View </button>
+            </form>
+          </div>
+        </article>
+      </div>
+        <% }) %>
+          <% } %>
+        </div>
+    </main>
+  <%- include('../partials/end.ejs') %>

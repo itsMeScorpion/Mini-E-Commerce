@@ -1,0 +1,65 @@
+<%- include('../partials/head.ejs') %>
+ <title>Home</title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/product.css" />
+    <link rel="stylesheet" href="/css/cart.css" />
+  </head>
+
+<body>
+  <%- include('../partials/nav.ejs') %>
+
+    <main class="container">
+ <% if(products.length === 0){ %>
+
+    <h1>YOUR WISHLIST IS EMPTY.... </h1>
+     <% } else{ %>
+       <div class="card">
+            <div class="row">
+                <div class="col-md-8 cart">
+                    <div class="title">
+                        <div class="row">
+                            <div class="col"><h4><b>WISH-LIST</b></h4></div>
+                            <div class="col "><%= products.length %> items</div>
+                        </div>
+        </div>  
+                     
+
+ <% products.forEach(function(product){  %>
+<div class="productcontainer">
+     <div class="containerRow ">
+         <div class="subdiv"><img class="productImage" src="<%= product.image %>"></div>
+                <div class="subdiv">
+                    <p class="product_name"><%= product.title %></p>
+                </div>
+            <div class="subdiv">
+              <form class="qform" method="POST" action="/remove-from-wishlist">
+              <input type="hidden" name="productID" value="<%= product.id %>">
+               <button class="updateBtns" name="submit" value="remove" type="submit">x</button>
+             </form>
+             <form method="POST" action="<%= iscart ? '/remove-from-cart' : '/add-to-cart' %>">
+              <input type="hidden" name="productID" value="<%= product.id %>">
+              <%if(!iscart ){%>
+              <button class="btn" name="submit" value="add"> Add to Cart </button>
+              <%}else{%>
+              <p class="btn">Item in cart</p>
+              <%}%>
+             </form>
+             </div>
+             <div class="subdiv"></div>
+           
+     </div>
+</div>
+ <% }) %>
+          <% } %>
+
+<div class="back-to-shop"><a href="/">&leftarrow;<span class="text-muted">Back to shop</span></a></div>
+
+              
+           
+
+                  
+ 
+           
+</main>
+
+<%- include('../partials/end.ejs') %>
